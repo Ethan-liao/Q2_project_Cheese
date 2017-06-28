@@ -43,21 +43,30 @@ router.get('/success', (req, res, next) => {
 // Inserts into database
 router.post('/signup', (req, res, next) => {
   console.log(req.body);
-  console.log(req.body.news[1]);
-  db.insertUserInfo(req.body)
+
+  let newsInfo = req.body.news;
+  let userID = req.body.id;
+
+  // return Promise.all([
+    db.insertUserInfo(req.body)
+  // ])
     .then((results) => {
       console.log(results);
-      res.render('myPage', {
-        data:results
+      db.insertIdJoinNewsTable(results[0], newsInfo)
+      .then((result)=>{
+        res.render('myPage', {
+          data: results
+        })
       })
-      console.log("read passed the render myPage");
+      // 'results' is an ID
+      console.log('everything is performed');
     })
-    .catch((err)=>{
-      if (err){
+    .catch((err) => {
+      if (err) {
         return next(err);
       };
     })
-  });
+});
 
 
 module.exports = router;

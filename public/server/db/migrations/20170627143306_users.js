@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     // table.varchar("first_name");
     // table.varchar("last_name");
-    table.varchar("username")
+    table.varchar("username");
     table.varchar("email");
     table.varchar("hashed_password").notNullable()
     table.timestamps(true, true);
