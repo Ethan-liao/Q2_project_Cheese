@@ -4,8 +4,14 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/q2_project'
-  },
+    connection: 'postgres://localhost/q2_project',
+    migrations: {
+      directory: __dirname + '/public/server/db/migrations'
+    },
+    seeds: {
+      directory: __dirname + '/public/server/db/seeds'
+    }
+  }
   //
   // staging: {
   //   client: 'postgresql',
