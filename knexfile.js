@@ -11,38 +11,11 @@ module.exports = {
     seeds: {
       directory: __dirname + '/public/server/db/seeds'
     }
+  },
+
+  production: {
+    client: 'pg',
+    connection: 'postgres://pqoklsdrxgnznq:83c1ccb52beccb22ba079846358691d9dc811d767b2adb82815923439952522e@ec2-184-73-167-43.compute-1.amazonaws.com:5432/dev2ah3rtjn5m6'
   }
-  //
-  // staging: {
-  //   client: 'postgresql',
-  //   connection: {
-  //     database: 'my_db',
-  //     user:     'username',
-  //     password: 'password'
-  //   },
-  //   pool: {
-  //     min: 2,
-  //     max: 10
-  //   },
-  //   migrations: {
-  //     tableName: 'knex_migrations'
-  //   }
-  // },
-  //
-  // production: {
-  //   client: 'postgresql',
-  //   connection: {
-  //     database: 'my_db',
-  //     user:     'username',
-  //     password: 'password'
-  //   },
-  //   pool: {
-  //     min: 2,
-  //     max: 10
-  //   },
-  //   migrations: {
-  //     tableName: 'knex_migrations'
-  //   }
-  // }
 
 };
