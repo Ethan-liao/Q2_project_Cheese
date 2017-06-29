@@ -24,22 +24,22 @@ router.get('/newsPage', (req, res, next)=> {
   res.render('partials/newsPage')
 });
 
+// Adds blog to database
 router.post('/myPage', (req, res, next)=> {
   let logged = req.session.id;
 
   console.log(req.session);
   let blog = req.body.blogPost;
-  console.log(blog);
+  
   let userID = req.session.id;
 
-  console.log(userID);
 if (logged){
   db.insertBlog(blog)
   .then((blogID)=>{
     db.insertIDJoinBlogsTable(blogID,userID)
     .then((userBlogIDs)=>{
-
-      res.render('index',{
+      console.log(userBlogIDs);
+      res.render('mypage',{
         title:'Express'
       });
     })

@@ -44,7 +44,7 @@ function insertIDJoinBlogsTable(blogID, userID) {
     .insert({
       blog_id: parseInt(blogID),
       user_id: userID
-    })
+    }).returning('id');
 }
 
 //get blog posts for users

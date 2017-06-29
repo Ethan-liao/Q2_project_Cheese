@@ -17,15 +17,15 @@ const db = require('../db/js/dbquery');
 router.get('/', function(req, res, next) {
   console.log(req.session);
   let logged = req.session.id;
-  if (logged){
-  db.getBlogPosts()
-    .then((results) => {
-      console.log(results);
-      res.render('index', {
-        results
+  if (logged) {
+    db.getBlogPosts()
+      .then((results) => {
+        console.log(results);
+        res.render('index', {
+          results
+        })
       })
-    })
-  } else{
+  } else {
     res.render('partials/login')
   }
 });
@@ -77,9 +77,7 @@ router.post('/login/details', (req, res, next) => {
             res.sendStatus(401);
           }
         })
-
     })
-
 });
 
 
@@ -92,7 +90,7 @@ router.delete('/login', (req, res) => {
 
 // Inserts into database
 router.post('/signup', (req, res, next) => {
-  console.log(req.body);
+
 
   let newsInfo = req.body.news;
   let userID = req.body.id;
@@ -100,8 +98,6 @@ router.post('/signup', (req, res, next) => {
   bycrypt.hash(req.body.password, saltRounds).then((digest) => {
       db.insertUserInfo(req.body, digest)
         .then((results) => {
-
-          console.log(results);
 
           db.insertIdJoinNewsTable(results[0], newsInfo)
             .then((result) => {

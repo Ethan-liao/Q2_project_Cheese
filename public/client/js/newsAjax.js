@@ -12,9 +12,20 @@ function getNews() {
       type: 'GET',
       dataType: "json",
       success:(result) => {
-      let heading5 = $('.footerClass');
-      heading5.text(result.articles[0].title);
 
+      let title1 = $('.title1');
+      let title2 = $('.title2');
+      let title3 = $('.title3');
+      let image1 = $('.image1');
+      let image2 = $('.image2');
+      let image3 = $('.image3');
+
+      title1.text(result.articles[0].title);
+      title2.text(result.articles[1].title);
+      title3.text(result.articles[2].title);
+      image1.attr('src',result.articles[0].urlToImage);
+      image2.attr('src',result.articles[1].urlToImage);
+      image3.attr('src',result.articles[2].urlToImage)
 
         console.log(result.source);
         console.log(result.sortBy);
