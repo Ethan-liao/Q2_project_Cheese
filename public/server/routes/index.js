@@ -15,9 +15,13 @@ const db = require('../db/js/dbquery');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log(req.session);
-  res.render('index', {
-    title: 'Express'
-  });
+  db.getBlogPosts()
+    .then((results) => {
+      console.log(results);
+      res.render('index', {
+        results
+      })
+    })
 });
 
 
@@ -34,23 +38,23 @@ router.get('/success', (req, res, next) => {
 })
 
 // Redirects to the login page
-router.get('/login', (req, res, next) =>{
+router.get('/login', (req, res, next) => {
   console.log(req.session);
   res.render('partials/login');
 })
 
 
 //logging in
-router.post('/login/details', (req, res, next) =>{
+router.post('/login/details', (req, res, next) => {
   req.session.views = (req.session.views || 0) + 1;
-//.body contains forms info
+  //.body contains forms info
   let name = req.body.username;
   let password = req.body.password;
   knex('users')
     .where('username', req.body.username)
     .first()
     .then((results) => {
-//results contains an object with matching username
+      //results contains an object with matching username
       console.log(results);
       bycrypt.compare(req.body.password, results.hashed_password)
         .then((passwordsMatch) => {
@@ -70,6 +74,13 @@ router.post('/login/details', (req, res, next) =>{
 
 });
 
+
+// logging out
+router.delete('/users', (req, res) => {
+  req.session = null;
+  res.sendStatus(200);
+  console.log((req.session));
+})
 
 // Inserts into database
 router.post('/signup', (req, res, next) => {

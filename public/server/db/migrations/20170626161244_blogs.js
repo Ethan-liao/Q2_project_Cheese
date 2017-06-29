@@ -1,7 +1,7 @@
 
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('blogs', (table)=>{
-    table.increments();
+    table.increments('id');
     table.text("post");
     table.timestamps(true, true);
   })

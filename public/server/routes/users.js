@@ -30,10 +30,10 @@ router.post('/myPage', (req, res, next)=> {
   .then((blogID)=>{
     db.insertIDJoinBlogsTable(blogID,userID)
     .then((userBlogIDs)=>{
-      // setTimeout(()=> {
-      //   window.confirm('Post added')
-      // }, 3000);
-      res.redirect('/newsPage');
+
+      res.render('index',{
+        title:'Express'
+      });
     })
   })
 
