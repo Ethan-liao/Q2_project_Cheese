@@ -23,14 +23,21 @@ function getNews() {
     })
   }
 
-  // $.ajax({
-  //   url: '/news',
-  //   type: 'GET',
-  //   data: result,
-  //   success(result){
-  //     console.log("Ajax results passed to routes");
-  //   }
+// Logging in alert
+  // $('#login').click(()=>{
+  //   alert("User logged in")
   // })
+
+$('#logout').click(()=>{
+  alert("User logged out")
+  $.ajax({
+    url: '/login',
+    type: 'delete',
+    success(result){
+      console.log("Ajax results passed to routes");
+    }
+  })
+})
 // getNews();
 
 });

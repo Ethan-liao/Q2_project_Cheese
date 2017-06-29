@@ -12,9 +12,12 @@ const bycrypt = require('bcrypt');
 
 const db = require('../db/js/dbquery');
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log(req.session);
+  let logged = req.session.id;
+  if (logged){
   db.getBlogPosts()
     .then((results) => {
       console.log(results);
@@ -22,6 +25,9 @@ router.get('/', function(req, res, next) {
         results
       })
     })
+  } else{
+    res.render('partials/login')
+  }
 });
 
 
@@ -65,7 +71,9 @@ router.post('/login/details', (req, res, next) => {
             console.log(req.session);
 
             res.render('myPage')
+
           } else {
+
             res.sendStatus(401);
           }
         })
@@ -76,7 +84,7 @@ router.post('/login/details', (req, res, next) => {
 
 
 // logging out
-router.delete('/users', (req, res) => {
+router.delete('/login', (req, res) => {
   req.session = null;
   res.sendStatus(200);
   console.log((req.session));

@@ -1,3 +1,4 @@
+
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -9,7 +10,6 @@ const cookieSession = require('cookie-session');
 const index = require('./public/server/routes/index');
 const users = require('./public/server/routes/users');
 
-
 const app = express();
 
 
@@ -17,6 +17,9 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
