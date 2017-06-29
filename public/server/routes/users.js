@@ -1,15 +1,42 @@
 var express = require('express');
 var router = express.Router();
+
 const environment = process.env.NODE_ENV || 'development';
 const knexConfig = require('../../../knexfile')[environment];
 const knex = require('knex')(knexConfig);
 
+const db = require('../db/js/dbquery');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+// Redirects to myPage
+router.get('/myPage', (req, res, next)=> {
+  console.log(req.session);
+  res.render('myPage')
 });
 
+//Redirects to newsPage
+router.get('/newsPage', (req, res, next)=> {
+  console.log(req.session);
+  res.render('partials/newsPage')
+});
 
+router.post('/myPage', (req, res, next)=> {
+  console.log(req.session);
+  let blog = req.body.blogPost;
+  console.log(blog);
+  let userID = req.session.id;
+  console.log(userID);
+
+  db.insertBlog(blog)
+  .then((blogID)=>{
+    db.insertIDJoinBlogsTable(blogID,userID)
+    .then((userBlogIDs)=>{
+      // setTimeout(()=> {
+      //   window.confirm('Post added')
+      // }, 3000);
+      res.redirect('/newsPage');
+    })
+  })
+
+});
 
 module.exports = router;
