@@ -48,13 +48,15 @@ function insertIDJoinBlogsTable(blogID, userID) {
 }
 
 //get blog posts for users
-function getBlogPosts() {
+function getBlogPosts(userID) {
   return knex('users')
     .innerJoin('users_blogs', 'users.id', 'users_blogs.user_id')
     .innerJoin('blogs','blogs.id','users_blogs.blog_id')
-    .where('users_blogs.user_id',4);
+    .where('users_blogs.user_id',userID);
 
 }
+
+
 
 module.exports = {
   insertUserInfo: insertUserInfo,

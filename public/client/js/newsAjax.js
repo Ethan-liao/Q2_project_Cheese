@@ -1,5 +1,6 @@
 $( document ).ready(() => {
-console.log($('.footerClass').text());
+
+
 
 function pageLoad() {
 
@@ -34,10 +35,7 @@ function getNews() {
     })
   }
 
-// Logging in alert
-  // $('#login').click(()=>{
-  //   alert("User logged in")
-  // })
+
 
 $('#logout').click(()=>{
   alert("User logged out")

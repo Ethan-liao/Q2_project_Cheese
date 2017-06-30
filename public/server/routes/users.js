@@ -12,7 +12,13 @@ router.get('/myPage', (req, res, next)=> {
 let logged = req.session.id;
   console.log(req.session);
   if (logged){
-  res.render('myPage')
+    db.getBlogPosts(logged)
+    .then((results)=>{
+      console.log(results);
+      res.render('myPage',{
+        results
+      })
+    })
 }else {
   res.render('partials/login');
 }
@@ -30,7 +36,7 @@ router.post('/myPage', (req, res, next)=> {
 
   console.log(req.session);
   let blog = req.body.blogPost;
-  
+
   let userID = req.session.id;
 
 if (logged){
@@ -38,10 +44,14 @@ if (logged){
   .then((blogID)=>{
     db.insertIDJoinBlogsTable(blogID,userID)
     .then((userBlogIDs)=>{
-      console.log(userBlogIDs);
-      res.render('mypage',{
-        title:'Express'
-      });
+      console.log("This is adding a blog post" + userBlogIDs);
+      db.getBlogPosts(logged)
+        .then((results) => {
+          console.log(results);
+          res.render('myPage', {
+            results
+          })
+        })
     })
   })
 }else {

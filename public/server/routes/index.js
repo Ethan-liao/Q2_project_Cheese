@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
   console.log(req.session);
   let logged = req.session.id;
   if (logged) {
-    db.getBlogPosts()
+    db.getBlogPosts(logged)
       .then((results) => {
         console.log(results);
         res.render('index', {
@@ -69,14 +69,22 @@ router.post('/login/details', (req, res, next) => {
             req.session.id = results.id;
             console.log("successfully logged in");
             console.log(req.session);
+            console.log("the above has been logged");
 
-            res.render('myPage')
+            db.getBlogPosts(results.id)
+            .then((results)=>{
+              console.log(results);
+              res.render('myPage',{
+                results
+              })
+            })
 
           } else {
 
             res.sendStatus(401);
           }
         })
+
     })
 });
 
@@ -100,7 +108,15 @@ router.post('/signup', (req, res, next) => {
         .then((results) => {
 
           db.insertIdJoinNewsTable(results[0], newsInfo)
-            .then((result) => {
+            .then((result) =>{
+            //results is username ID
+  //           username: 'hello',
+              // password: '124',
+              // password2: '1234',
+              // email: 'liao@asdf',
+              // news: [ '1', '2' ]
+              console.log(results);
+              console.log(req.body);
               res.render('myPage', {
                 data: req.body
               })
