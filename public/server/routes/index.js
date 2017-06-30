@@ -132,13 +132,7 @@ router.post('/signup', (req, res, next) => {
               // password2: '1234',
               // email: 'liao@asdf',
               // news: [ '1', '2' ]
-              db.getBlogPosts(results[0])
-                .then((results) => {
-                  console.log(results);
-                  res.render('myPage', {
-                    results
-                  })
-                })
+              res.render('partials/login')
             })
         })
     })
