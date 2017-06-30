@@ -84,12 +84,15 @@ router.post('/myPage', (req, res, next) => {
 //Deleting a post
 router.delete('/myPage/:id', (req, res, next) => {
   let blogID = req.params.id;
-  console.log("hitting delete route" + blogID);
-  db.deletBlog(parseInt(blogID))
+  console.log("hitting delete route " + blogID);
+  db.deleteBlog(parseInt(blogID))
     .then((results) => {
-      db.deleteBlogPost(results)
+      console.log(results);
+      db.deleteBlogPost(results[0])
         .then((postID) => {
-          res.redirect('/myPage')
+          res.render('myPage')
+        }).catch((error)=>{
+          console.log('error');
         })
     })
 })

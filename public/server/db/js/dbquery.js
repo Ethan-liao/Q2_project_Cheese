@@ -57,6 +57,7 @@ function getBlogPosts(userID) {
 
 //Deleting blog id
 function deleteBlog(blogID) {
+  console.log('TESTING DELEATE BLEAODG', blogID);
   return knex('users_blogs')
       .del()
       .where('blog_id',blogID)
@@ -65,6 +66,7 @@ function deleteBlog(blogID) {
 
 //Deleting the blog post
 function deleteBlogPost(blogID) {
+  console.log("deletblog testing", blogID);
   return knex('blogs')
       .del()
       .where("id",blogID)

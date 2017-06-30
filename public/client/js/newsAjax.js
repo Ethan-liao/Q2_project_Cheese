@@ -148,11 +148,13 @@ $('#editBlog').click((a)=>{
 })
 //Deleting a post
 $('#deletePost').click((a)=>{
+  console.log($(a.target).attr("action"));
   a.preventDefault();
   $.ajax({
     url: '/myPage/' + $(a.target).attr("action"),
     type: 'DELETE',
     success(result){
+      window.location.replace('/myPage');
       console.log("Ajax delete blog results passed to routes");
     }
   })
