@@ -66,7 +66,21 @@ router.get('/news', function(req, res, next) {
   }
 });
 
-//gets news
+router.get('/news/api', function(req, res, next) {
+  console.log(req.session);
+  let logged = req.session.id;
+  if (logged) {
+    db.getNewsfromJoin(logged)
+      .then((results) => {
+        console.log(results);
+        res.json(results)
+      })
+  } else {
+    res.render('partials/login')
+  }
+});
+
+
 
 
 //logging in

@@ -54,11 +54,6 @@ router.patch('/editBlog/:id', (req, res, next) => {
     })
 })
 
-//Redirects to newsPage
-router.get('/newsPage', (req, res, next) => {
-  console.log(req.session);
-  res.render('partials/newsPage')
-});
 
 // Adds blog to database
 router.post('/myPage', (req, res, next) => {
