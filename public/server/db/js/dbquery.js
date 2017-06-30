@@ -17,7 +17,6 @@ function insertIdJoinNewsTable(userID, newsID) {
 }
 
 
-
 //insert into user table
 function insertUserInfo(info, pw) {
 
@@ -56,12 +55,27 @@ function getBlogPosts(userID) {
 
 }
 
+//Deleting blog id
+function deleteBlog(blogID) {
+  return knex('users_blogs')
+      .del()
+      .where('blog_id',blogID)
+      .returning("id")
+}
 
+//Deleting the blog post
+function deleteBlogPost(blogID) {
+  return knex('blogs')
+      .del()
+      .where("id",blogID)
+}
 
 module.exports = {
   insertUserInfo: insertUserInfo,
   insertIdJoinNewsTable: insertIdJoinNewsTable,
   insertBlog: insertBlog,
   insertIDJoinBlogsTable: insertIDJoinBlogsTable,
-  getBlogPosts:getBlogPosts
+  getBlogPosts:getBlogPosts,
+  deleteBlog:deleteBlog,
+  deleteBlogPost:deleteBlogPost
 }

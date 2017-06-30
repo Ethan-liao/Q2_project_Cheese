@@ -1,15 +1,16 @@
 <% include partials/header %>
 <main>
 
+
 <form method="post" action="/myPage" class="form-horizontal">
 <fieldset>
-  <legend>Legend</legend>
+
 
   <div class="form-group">
 
-    <label for="textArea" class="col-lg-2 control-label">Blog</label>
-    <div class="col-lg-10">
-      <textarea name="blogPost"class="form-control" rows="3" id="textArea"></textarea>
+    <label for="textArea" class="col-lg-2 control-label"></label>
+    <div class="col-lg-7">
+      <textarea name="blogPost"class="form-control" rows="5" id="textArea" placeholder="Write out your thoughts..."></textarea>
     </div>
   </div>
   <div class="form-group">
@@ -25,9 +26,15 @@
 <br>
 
 <% results.forEach((blog)=>{%>
+
 <blockquote>
+
 <p><%=blog.post%></p>
 <small>Written by <cite title="Source Title"><%=blog.username%></cite></small>
+<br>
+<%=blog.blog_id%>
+<a id="edit" href="/editblog/<%=blog.blog_id%>" class="btn btn-default  btn-xs"><p class="text-primary">Edit</p></a>
+<a id="deletePost" action="<%=blog.blog_id%>" class="btn btn-default btn-xs"><p class="text-danger">Delete</p></a>
 </blockquote>
 
 <%})%>

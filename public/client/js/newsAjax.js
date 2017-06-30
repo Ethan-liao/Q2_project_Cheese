@@ -34,14 +34,42 @@ function getNews() {
       }
     })
   }
+//Editing a blogID
 
+$('#editBlog').click((a)=>{
+  a.preventDefault();
+  let editedBlog = {
+    "blogPost": $('#textArea').val()
+  }
+  $.ajax({
+    url: '/editBlog/'+ $(a.target).attr('action'),
+    type: 'PATCH',
+    data: editedBlog,
+    success(result) {
 
+      window.location.replace('/myPage');
+
+    }
+  })
+})
+//Deleting a post
+$('.deletePost').click((a)=>{
+  a.preventDefault();
+  $.ajax({
+    url: '/myPage/' + $(a.target).attr("action"),
+    type: 'DELETE',
+    success(result){
+      console.log("Ajax delete blog results passed to routes");
+    }
+  })
+})
 
 $('#logout').click(()=>{
   alert("User logged out")
   $.ajax({
     url: '/login',
-    type: 'delete',
+    type: 'DELETE',
+    data: blogID,
     success(result){
       console.log("Ajax results passed to routes");
     }

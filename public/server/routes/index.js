@@ -109,14 +109,14 @@ router.post('/signup', (req, res, next) => {
 
           db.insertIdJoinNewsTable(results[0], newsInfo)
             .then((result) =>{
+              console.log(results);
+              console.log(req.body);
             //results is username ID
-  //           username: 'hello',
+            //username: 'hello',
               // password: '124',
               // password2: '1234',
               // email: 'liao@asdf',
               // news: [ '1', '2' ]
-              console.log(results);
-              console.log(req.body);
               res.render('myPage', {
                 data: req.body
               })

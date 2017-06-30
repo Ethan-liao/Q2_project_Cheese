@@ -8,55 +8,96 @@ const knex = require('knex')(knexConfig);
 const db = require('../db/js/dbquery');
 
 // Redirects to myPage
-router.get('/myPage', (req, res, next)=> {
-let logged = req.session.id;
+router.get('/myPage', (req, res, next) => {
+  let logged = req.session.id;
   console.log(req.session);
-  if (logged){
+  if (logged) {
     db.getBlogPosts(logged)
-    .then((results)=>{
-      console.log(results);
-      res.render('myPage',{
+      .then((results) => {
+        console.log(results);
+        res.render('myPage', {
+          results
+        })
+      })
+  } else {
+    res.render('partials/login');
+  }
+});
+
+//redirects to editblog
+router.get('/editblog/:id', (req, res, next) => {
+  knex('blogs')
+    .where('id', req.params.id)
+    .first()
+    .then((results) => {
+      console.log("Editblog redirect hit");
+      res.render('partials/editblog', {
         results
       })
     })
-}else {
-  res.render('partials/login');
-}
-});
+})
+
+// Editing blog
+router.patch('/editBlog/:id', (req, res, next) => {
+
+  knex('blogs')
+    .where('id', req.params.id)
+    .update({
+      post: req.body.blogPost
+    })
+    .then((results) => {
+
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log((err));
+    })
+})
 
 //Redirects to newsPage
-router.get('/newsPage', (req, res, next)=> {
+router.get('/newsPage', (req, res, next) => {
   console.log(req.session);
   res.render('partials/newsPage')
 });
 
 // Adds blog to database
-router.post('/myPage', (req, res, next)=> {
+router.post('/myPage', (req, res, next) => {
   let logged = req.session.id;
-
-  console.log(req.session);
   let blog = req.body.blogPost;
-
   let userID = req.session.id;
 
-if (logged){
-  db.insertBlog(blog)
-  .then((blogID)=>{
-    db.insertIDJoinBlogsTable(blogID,userID)
-    .then((userBlogIDs)=>{
-      console.log("This is adding a blog post" + userBlogIDs);
-      db.getBlogPosts(logged)
-        .then((results) => {
-          console.log(results);
-          res.render('myPage', {
-            results
+  if (logged) {
+    db.insertBlog(blog)
+      .then((blogID) => {
+        db.insertIDJoinBlogsTable(blogID, userID)
+          .then((userBlogIDs) => {
+            console.log("This is adding a blog post" + userBlogIDs);
+            db.getBlogPosts(logged)
+              .then((results) => {
+                console.log(results);
+                res.render('myPage', {
+                  results
+                })
+              })
           })
+      })
+  } else {
+    res.render('partials/login');
+  }
+});
+
+//Deleting a post
+router.delete('/myPage/:id', (req, res, next) => {
+  let blogID = req.params.id;
+  console.log("hitting delete route" + blogID);
+  db.deletBlog(parseInt(blogID))
+    .then((results) => {
+      db.deleteBlogPost(results)
+        .then((postID) => {
+          res.redirect('/myPage')
         })
     })
-  })
-}else {
-  res.render('partials/login');
-}
-});
+})
+
 
 module.exports = router;

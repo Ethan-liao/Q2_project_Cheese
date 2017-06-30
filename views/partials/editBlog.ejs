@@ -1,0 +1,31 @@
+<% include header %>
+<main>
+
+
+<form class="form-horizontal">
+<fieldset>
+
+
+  <div class="form-group">
+
+    <label for="textArea" class="col-lg-2 control-label"></label>
+    <div class="col-lg-7">
+      <textarea  name="blogPost"class="form-control" rows="5" id="textArea" placeholder="Write out your thoughts..."><%=results.post%></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-10 col-lg-offset-2">
+      <a href="/myPage"><button type="reset" class="btn btn-default">Cancel</button></a>
+      <button action='<%=results.id%>'id="editBlog"type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</fieldset>
+</form>
+<br>
+<br>
+<br>
+
+</main>
+
+
+<% include footer %>
