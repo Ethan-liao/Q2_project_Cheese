@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
     // table.varchar("last_name");
     table.string("username");
     table.string("email");
-    table.varchar("hashed_password").notNullable()
+    table.varchar("hashed_password").notNullable();
     table.timestamps(true, true);
   })
 };
