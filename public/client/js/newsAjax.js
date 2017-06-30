@@ -3,7 +3,16 @@ $( document ).ready(() => {
 
 
 function pageLoad() {
+  $.ajax({
+    url: '/editBlog/'+ $(a.target).attr('action'),
+    type: 'PATCH',
+    data: editedBlog,
+    success(result) {
 
+      window.location.replace('/myPage');
+
+    }
+  })
 };
 
 function getNews() {
@@ -53,7 +62,7 @@ $('#editBlog').click((a)=>{
   })
 })
 //Deleting a post
-$('.deletePost').click((a)=>{
+$('#deletePost').click((a)=>{
   a.preventDefault();
   $.ajax({
     url: '/myPage/' + $(a.target).attr("action"),
@@ -64,12 +73,14 @@ $('.deletePost').click((a)=>{
   })
 })
 
+
+//loggin out of profile
 $('#logout').click(()=>{
   alert("User logged out")
   $.ajax({
     url: '/login',
     type: 'DELETE',
-    data: blogID,
+    // data: blogID,
     success(result){
       console.log("Ajax results passed to routes");
     }

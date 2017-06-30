@@ -49,6 +49,25 @@ router.get('/login', (req, res, next) => {
   res.render('partials/login');
 })
 
+// Redirects to the news page
+router.get('/news', function(req, res, next) {
+  console.log(req.session);
+  let logged = req.session.id;
+  if (logged) {
+    db.getNewsfromJoin(logged)
+      .then((results) => {
+        console.log(results);
+        res.render('partials/newsPage', {
+          results
+        })
+      })
+  } else {
+    res.render('partials/login')
+  }
+});
+
+//gets news
+
 
 //logging in
 router.post('/login/details', (req, res, next) => {
@@ -72,12 +91,12 @@ router.post('/login/details', (req, res, next) => {
             console.log("the above has been logged");
 
             db.getBlogPosts(results.id)
-            .then((results)=>{
-              console.log(results);
-              res.render('myPage',{
-                results
+              .then((results) => {
+                console.log(results);
+                res.render('myPage', {
+                  results
+                })
               })
-            })
 
           } else {
 
@@ -98,28 +117,28 @@ router.delete('/login', (req, res) => {
 
 // Inserts into database
 router.post('/signup', (req, res, next) => {
-
-
   let newsInfo = req.body.news;
   let userID = req.body.id;
-
   bycrypt.hash(req.body.password, saltRounds).then((digest) => {
       db.insertUserInfo(req.body, digest)
         .then((results) => {
-
           db.insertIdJoinNewsTable(results[0], newsInfo)
-            .then((result) =>{
+            .then((result) => {
               console.log(results);
               console.log(req.body);
-            //results is username ID
-            //username: 'hello',
+              //results is username ID
+              //username: 'hello',
               // password: '124',
               // password2: '1234',
               // email: 'liao@asdf',
               // news: [ '1', '2' ]
-              res.render('myPage', {
-                data: req.body
-              })
+              db.getBlogPosts(results[0])
+                .then((results) => {
+                  console.log(results);
+                  res.render('myPage', {
+                    results
+                  })
+                })
             })
         })
     })
@@ -129,6 +148,9 @@ router.post('/signup', (req, res, next) => {
       };
     })
 });
+
+
+//Gets news
 
 
 module.exports = router;

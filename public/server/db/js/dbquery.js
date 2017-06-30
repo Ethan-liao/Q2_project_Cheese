@@ -70,6 +70,15 @@ function deleteBlogPost(blogID) {
       .where("id",blogID)
 }
 
+//Getting news from news table
+function getNewsfromJoin(userID) {
+  return knex('news')
+      .innerJoin('users_news','users_news.news_id','news.id')
+      .where('users_news.user_id',userID)
+}
+
+// function getnewsAPI()
+
 module.exports = {
   insertUserInfo: insertUserInfo,
   insertIdJoinNewsTable: insertIdJoinNewsTable,
@@ -77,5 +86,6 @@ module.exports = {
   insertIDJoinBlogsTable: insertIDJoinBlogsTable,
   getBlogPosts:getBlogPosts,
   deleteBlog:deleteBlog,
-  deleteBlogPost:deleteBlogPost
+  deleteBlogPost:deleteBlogPost,
+  getNewsfromJoin:getNewsfromJoin
 }
