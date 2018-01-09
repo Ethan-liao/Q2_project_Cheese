@@ -1,7 +1,5 @@
 $( document ).ready(() => {
 
-
-
 function pageLoad() {
 let cors = 'https://galvanize-cors-proxy.herokuapp.com/'
 let newsAPI = $('.newsAPI');
@@ -169,12 +167,9 @@ $('#logout').click(()=>{
     type: 'DELETE',
     // data: blogID,
     success(result){
-
       window.location.replace('/login');
       console.log("Ajax results passed to routes");
     }
   })
 })
-// getNews();
-
 });

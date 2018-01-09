@@ -16,10 +16,8 @@ function insertIdJoinNewsTable(userID, newsID) {
     .insert(newsArray)
 }
 
-
 //insert into user table
 function insertUserInfo(info, pw) {
-
   return knex('users')
     .insert({
       username: info.username,
@@ -30,7 +28,7 @@ function insertUserInfo(info, pw) {
 
 //insert into blogs table
 function insertBlog(text) {
-  console.log("inserting current data into blogs table " + text);
+  // console.log("inserting current data into blogs table " + text);
   return knex('blogs')
     .insert({
       post: text
@@ -57,7 +55,7 @@ function getBlogPosts(userID) {
 
 //Deleting blog id
 function deleteBlog(blogID) {
-  console.log('TESTING DELETE blogID', blogID);
+  // console.log('TESTING DELETE blogID', blogID);
   return knex('users_blogs')
       .del()
       .where('blog_id',blogID)
@@ -66,7 +64,7 @@ function deleteBlog(blogID) {
 
 //Deleting the blog post
 function deleteBlogPost(blogID) {
-  console.log("deleteblog post testing", blogID);
+  // console.log("deleteblog post testing", blogID);
   return knex('blogs')
       .del()
       .where("id",blogID)

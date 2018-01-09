@@ -10,11 +10,11 @@ const db = require('../db/js/dbquery');
 // Redirects to myPage
 router.get('/myPage', (req, res, next) => {
   let logged = req.session.id;
-  console.log(req.session);
+  // console.log(req.session);
   if (logged) {
     db.getBlogPosts(logged)
       .then((results) => {
-        console.log(results);
+        // console.log(results);
         res.render('myPage', {
           results
         })
@@ -27,10 +27,10 @@ router.get('/myPage', (req, res, next) => {
 //redirects to editblog
 router.get('/editblog/:id', (req, res, next) => {
   knex('blogs')
-    .where('id', req.params.id)
+    .where('id',req.params.id)
     .first()
     .then((results) => {
-      console.log("Editblog redirect hit");
+      // console.log("Editblog redirect hit");
       res.render('partials/editblog', {
         results
       })
@@ -46,11 +46,10 @@ router.patch('/editBlog/:id', (req, res, next) => {
       post: req.body.blogPost
     })
     .then((results) => {
-
       res.sendStatus(200);
     })
     .catch((err) => {
-      console.log((err));
+      // console.log((err));
     })
 })
 
@@ -84,19 +83,18 @@ router.post('/myPage', (req, res, next) => {
 //Deleting a post
 router.delete('/myPage/:id', (req, res, next) => {
   let blogID = req.params.id;
-  console.log("hitting delete route " + blogID);
+  // console.log("hitting delete route " + blogID);
   db.deleteBlog(parseInt(blogID))
     .then((results) => {
-      console.log(results);
+      // console.log(results);
       db.deleteBlogPost(results[0])
         .then((postID) => {
-          console.log("after results are deleted" + postID);
+          // console.log("after results are deleted" + postID);
           res.sendStatus(200);
         }).catch((error)=>{
-          console.log('error');
+          // console.log('error');
         })
     })
 })
-
 
 module.exports = router;

@@ -153,8 +153,4 @@ router.post('/signup', (req, res, next) => {
     })
 });
 
-
-//Gets news
-
-
 module.exports = router;
