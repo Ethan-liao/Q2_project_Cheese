@@ -15,12 +15,12 @@ const db = require('../db/js/dbquery');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log(req.session);
+  // console.log(req.session);
   let logged = req.session.id;
   if (logged) {
     db.getBlogPosts(logged)
       .then((results) => {
-        console.log(results);
+        // console.log(results);
         res.render('index', {
           results
         })
@@ -33,25 +33,25 @@ router.get('/', function(req, res, next) {
 
 // Redirects to the registeration page
 router.get('/registeration', (req, res, next) => {
-  console.log(req.session);
+  // console.log(req.session);
   res.render('partials/registeration')
 })
 
 // Redirects to success page
 router.get('/success', (req, res, next) => {
-  console.log(req.session);
+  // console.log(req.session);
   res.render('partials/success');
 })
 
 // Redirects to the login page
 router.get('/login', (req, res, next) => {
-  console.log(req.session);
+  // console.log(req.session);
   res.render('partials/login');
 })
 
 // Redirects to the news page
 router.get('/news', function(req, res, next) {
-  console.log(req.session);
+  // console.log(req.session);
   let logged = req.session.id;
   if (logged) {
     db.getNewsfromJoin(logged)
@@ -67,12 +67,12 @@ router.get('/news', function(req, res, next) {
 });
 
 router.get('/news/api', function(req, res, next) {
-  console.log(req.session);
+  // console.log(req.session);
   let logged = req.session.id;
   if (logged) {
     db.getNewsfromJoin(logged)
       .then((results) => {
-        console.log(results);
+        // console.log(results);
         res.json(results)
       })
   } else {
@@ -94,16 +94,14 @@ router.post('/login/details', (req, res, next) => {
     .first()
     .then((results) => {
       //results contains an object with matching username
-      console.log(results);
+      // console.log(results);
       bycrypt.compare(req.body.password, results.hashed_password)
         .then((passwordsMatch) => {
           if (passwordsMatch) {
-
             req.session.id = results.id;
-            console.log("successfully logged in");
-            console.log(req.session);
-            console.log("the above has been logged");
-
+            // console.log("successfully logged in");
+            // console.log(req.session);
+            // console.log("the above has been logged");
             db.getBlogPosts(results.id)
               .then((results) => {
                 console.log(results);
@@ -111,9 +109,7 @@ router.post('/login/details', (req, res, next) => {
                   results
                 })
               })
-
           } else {
-
             res.sendStatus(401);
           }
         })
@@ -126,7 +122,7 @@ router.post('/login/details', (req, res, next) => {
 router.delete('/login', (req, res) => {
   req.session = null;
   res.sendStatus(200);
-  console.log((req.session));
+  // console.log((req.session));
 })
 
 // Inserts into database
@@ -138,8 +134,8 @@ router.post('/signup', (req, res, next) => {
         .then((results) => {
           db.insertIdJoinNewsTable(results[0], newsInfo)
             .then((result) => {
-              console.log(results);
-              console.log(req.body);
+              // console.log(results);
+              // console.log(req.body);
               //results is username ID
               //username: 'hello',
               // password: '124',
