@@ -25,7 +25,7 @@
 <br>
 <br>
 
-<% results.forEach((blog)=>{%>
+<% results.forEach((blog) => {%>
 
 <blockquote>
 
@@ -34,8 +34,25 @@
 <br>
 
 <a id="edit" href="/editblog/<%=blog.blog_id%>" class="btn btn-default  btn-xs"><p class="text-primary">Edit</p></a>
+<a id="deletePost"   action="<%=blog.blog_id%>" href="/myPage/<%=blog.blog_id%>" class="btn btn-default  btn-xs"><p class="text-danger">Delete</p></a>
 
-<button class="btn btn-default btn-xs" id="deletePost" action="<%=blog.blog_id%>" type="button" name="button"><p id="deletePost" action="<%=blog.blog_id%>" class="text-danger">Delete</p></button>
+<div class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body…</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 </blockquote>
 
 <%})%>

@@ -130,22 +130,22 @@ function getNews() {
   }
 //Editing a blogID
 
-$('#editBlog').click((a)=>{
-  a.preventDefault();
-  let editedBlog = {
-    "blogPost": $('#textArea').val()
-  }
-  $.ajax({
-    url: '/editBlog/'+ $(a.target).attr('action'),
-    type: 'PATCH',
-    data: editedBlog,
-    success(result) {
-
-      window.location.replace('/myPage');
-
-    }
-  })
-})
+// $('#editBlog').click((a)=>{
+//   a.preventDefault();
+//   let editedBlog = {
+//     "blogPost": $('#textArea').val()
+//   }
+//   $.ajax({
+//     url: '/editBlog/'+ $(a.target).attr('action'),
+//     type: 'PATCH',
+//     data: editedBlog,
+//     success(result) {
+//
+//       window.location.replace('/myPage');
+//
+//     }
+//   })
+// })
 //Deleting a post
 $('#deletePost').click((a)=>{
   console.log($(a.target).attr("action"));

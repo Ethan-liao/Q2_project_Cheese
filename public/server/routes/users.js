@@ -90,7 +90,8 @@ router.delete('/myPage/:id', (req, res, next) => {
       console.log(results);
       db.deleteBlogPost(results[0])
         .then((postID) => {
-          res.render('myPage')
+          console.log("after results are deleted" + postID);
+          res.sendStatus(200);
         }).catch((error)=>{
           console.log('error');
         })
