@@ -39,6 +39,7 @@ h3 {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+
   width: 100%;
   height: auto;
 }
@@ -103,7 +104,10 @@ h3 {
 .carousel-wrapper .flickity-viewport, .carousel-wrapper .flickity-slider {
   overflow: visible;
 }
-
+.carousel {
+  width: 550px;
+  margin: auto;
+}
 a {
   color: #00B7FF;
 }
@@ -125,6 +129,12 @@ body {
   display: -webkit-flex;
   display: flex;
   height: 100%;
+}
+#loginBox {
+  width: 100%;
+}
+#signUpPage {
+  width: 100%;
 }
 
 #logbox {
