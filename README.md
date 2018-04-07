@@ -24,12 +24,12 @@ Initial thoughts were to create a simple blogging website with CRUD capabilities
 
 ### How it works
 
-* ![Snippet](https://media.giphy.com/media/xT1R9JOVGJNBacNcBy/giphy.gif "Cheese snippet")
+  ![Snippet](https://media.giphy.com/media/xT1R9JOVGJNBacNcBy/giphy.gif "Cheese snippet")
 * On the main page you will be prompted to sign in - if you don't already have login details simply sign up.
-![Landing Page](./Images/login.png "Cheese Landing Page")
+![Landing Page](./Images/Login.png "Cheese Landing Page")
 * Here is the signup page if you have not signed up
 ![Signup Page](./Images/SignUp.png "Signup Page")
 * News page
-![News Page](./Images/news.png "News Page")
+![News Page](./Images/News.png "News Page")
 * Blog page
 ![Blog Page](./Images/Blog.png "Blog Page")
