@@ -1,6 +1,6 @@
 # Cheese
 
-## Motivation
+### Motivation
 Motivation behind the name - Cheese, the more it ages the more sophisticated(delicious) the taste. That's the idea this project is built on. A simple working page that increases in flavor as you add more content.
 
 Initial thoughts were to create a simple blogging website with CRUD capabilities. Once CRUD was achieved I wanted to add more features to make the page a more usable working space.
@@ -8,7 +8,7 @@ Initial thoughts were to create a simple blogging website with CRUD capabilities
 ### Deployed Site
  https://el-cheese.herokuapp.com/
 
-## Technologies used
+### Technologies used
 * [Angular.js](https://docs.angularjs.org/guide/introduction)  - Front-end web framework
 * [Jquery](https://jquery.com/) - Front-end Javascript library
 * [Bootstrap](http://getbootstrap.com/) - Styling framework
@@ -22,7 +22,7 @@ Initial thoughts were to create a simple blogging website with CRUD capabilities
 * [Heroku](https://www.heroku.com/) - Web app deployment
 
 
-## How it works
+### How it works
 
 * ![Snippet](https://media.giphy.com/media/xT1R9JOVGJNBacNcBy/giphy.gif "Cheese snippet")
 * On the main page you will be prompted to sign in - if you don't already have login details simply sign up.
